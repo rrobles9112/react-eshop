@@ -64,7 +64,7 @@ const ProductContainer = props => (
                 if(state.cart.length > 0){
                     console.log('count',count);
                     state.cart.forEach(el=>{
-                        count =count + el.product.cuantity
+                        count =count + el.product.price
                     })
                     return count;
                 }else{
