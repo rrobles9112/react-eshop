@@ -3,6 +3,7 @@ import ShopIcon from "@material-ui/icons/Shop";
 import { withStyles } from "@material-ui/core/styles";
 import ProductStore from "./../models/ProductStore";
 import Badge from "@material-ui/core/es/Badge/Badge";
+import { Grid } from "@material-ui/core/es";
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
@@ -42,7 +43,7 @@ const styles = theme => ({
         display: "flex",
         flexDirection: "column"
     },
-    margin:{
+    margin: {
         margin: theme.spacing.unit * 1,
     },
     cardMedia: {
@@ -70,12 +71,24 @@ class BadgeShop extends PureComponent {
         const { classes, proStore } = this.props;
         console.log(proStore)
         return (
-           <React.Fragment>
-               <Badge className={classes.margin} badgeContent={this.props.proStore.getBadgeTotalBroughtProduct()}
-                      color={'secondary'}>
-                   <ShopIcon className={classes.icon}/>
-               </Badge>
-           </React.Fragment>
+            <React.Fragment>
+                <Grid container
+                    direction="row"
+                    justify="flex-end"
+                    alignItems="center">
+                    <Grid item xs='auto'>
+                        <Badge className={classes.margin} badgeContent={this.props.proStore.getBadgeCuantityTotalProduct()}
+                            color={'secondary'}>
+                            <ShopIcon className={classes.icon} />
+                        </Badge>
+                    </Grid>
+                    <Grid item xs='auto'>
+                        <p style={{marginLeft:'20px', marginRight:'20px'}}>$ {this.props.proStore.getBadgeTotalBroughtProduct()}</p>
+                    </Grid>
+                </Grid>
+
+
+            </React.Fragment>
 
         );
     }
@@ -90,7 +103,7 @@ class BadgeShopConnected extends Component {
         return (
             <ProductStore context='shop' pure>
                 {(store) => (
-                    <BadgeShopWithStyles proStore={store}/>
+                    <BadgeShopWithStyles proStore={store} />
                 )}
             </ProductStore>
 

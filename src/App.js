@@ -25,8 +25,10 @@ class App extends Component {
 				<AuthStore context="Auth" pure>
 					{(state) => (
 						<Router>
+
 							<AsyncLogin path="/" authStore={state} />
 							<ProtectedHomeRoute path="home/*" isAuth={state.isAuth} />
+
 						</Router>
 					)}
 				</AuthStore>

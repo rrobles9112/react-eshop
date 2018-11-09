@@ -13,6 +13,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { navigate, Redirect } from "@reach/router";
+import Snackbar from "@material-ui/core/es/Snackbar/Snackbar";
 
 const styles = theme => ({
   layout: {
@@ -50,23 +51,50 @@ const styles = theme => ({
 class SignIn extends Component {
   state = {
     user: "",
-    pass: ""
+    pass: "",
+      open: false,
+      vertical: 'top',
+      horizontal: 'center',
   };
+
+  static getDerivatedStateFromProps(prop, state){
+    console.log('getDerivatedStateFromProps=',prop, state);
+  }
+
   componentDidMount() {
     console.log("did Mounted", this.props);
   }
+
+    handleClick = state => () => {
+        this.setState({ open: true, ...state });
+    };
+
   componentWillReceiveProps(nextProps, nextContext) {
-      console.log(nextProps, nextContext);
+      console.log('componentWillReceiveProps=',nextProps, nextContext);
   }
 
-    render() {
+  render() {
+
+    const {horizontal, open, vertical} = this.state;
+
+    console.log('local state=',horizontal, open, vertical);
+
     const {
       classes,
       authStore: { isAuth }
     } = this.props;
-    console.log(isAuth);
+
     return (
       <React.Fragment>
+          <Snackbar
+              anchorOrigin={{ vertical, horizontal }}
+              open={open}
+              onClose={this.handleClose}
+              ContentProps={{
+                  'aria-describedby': 'message-id',
+              }}
+              message={<span id="message-id">Hubo un error en el acceso.</span>}
+          />
         {isAuth === true ? (
                 <Redirect to={`/home`} noThrow/>
         ) : (

@@ -2,6 +2,7 @@ import React from 'react'
 import { Container } from "constate";
 import { loginRequestApi, logoutRequestApi } from './../helpers/API';
 import { navigate } from '@reach/router'
+import Snackbar from '@material-ui/core/Snackbar'
 
 const AuthContainer = props => (
     <Container
@@ -20,7 +21,7 @@ const AuthContainer = props => (
                         const r = { ...data };
                         
                         if (typeof (r.data.user.stsTokenManager.access_token) !== undefined) {
-                            console.log('data', r.data.user.stsTokenManager.accessToken);
+
                             let token = r.data.user.stsTokenManager.accessToken;
                             localStorage.setItem('isAuth', true);
                             localStorage.setItem('userToken', token);

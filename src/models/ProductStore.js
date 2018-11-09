@@ -46,33 +46,41 @@ const ProductContainer = props => (
         }}
         selectors={{
             getQuantity: (id) => state => {
-
-
                 if(state.cart.find(el => el.id === id)){
                     let a = state.cart.find(el => el.id === id)
-
                     return state.products.find(el => el.id === id).product.cuantity - state.cart.find(el => el.id === id).product.cuantity
-
                 }else{
                     return state.products.find(el => el.id === id).product.cuantity
-
                 }
             },
             getBadgeTotalBroughtProduct: () => state =>{
-                let count=0;
+                let count=Number(0);
                 console.log('asdasdasdasda')
                 if(state.cart.length > 0){
                     console.log('count',count);
                     state.cart.forEach(el=>{
-                        count =count + el.product.price
+                        count = count + Number(el.product.price)
                     })
                     return count;
                 }else{
                     return count;
                 }
-
-
+            },
+            getBadgeCuantityTotalProduct: () => state =>{
+                let count=Number(0);
+                console.log('asdasdasdasda')
+                if(state.cart.length > 0){
+                    console.log('count',count);
+                    state.cart.forEach(el=>{
+                        count = count + Number(el.product.cuantity)
+                    })
+                    return count;
+                }else{
+                    return count;
+                }
             }
+            
+
         }}
         effects={{
             fetchEffect:  (params) => ({ setState }) => {
