@@ -99,8 +99,9 @@ class SignIn extends Component {
                 <Redirect to={`/home`} noThrow/>
         ) : (
           <div>
-            <CssBaseline />
+            
             <main className={classes.layout}>
+            <CssBaseline />
               <Paper className={classes.paper}>
                 <Avatar className={classes.avatar}>
                   <LockIcon />
